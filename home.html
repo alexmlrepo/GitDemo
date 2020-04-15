@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <input type="text" name="latitude" placeholder="Latitude">
+        <input type="text"  name="longitude" placeholder="Longitude">
+        <input type="text"  name="name" placeholder="name">
+        <input type="text"  name="rank" placeholder="rank">
+        
+        <button type="submit">Submit</button>
+    </form>
+    <button id="mybtn">post it</button>
+</body>
+<script>
+    document.getElementById("myform").onsubmit=(e)=>{
+     e.preventDefault();
+    url="http://localhost:5000/sent"
+    var data=new URLSearchParams();
+    for(const pair of new FormData(e.target)){
+        console.log(pair)
+        data.append(pair[0],pair[1])
+    }
+    fetch(url,{
+        method:"post",
+        body:data,
+    }).then(res=>res.json()).then(res2=>console.log(res2));
+
+}
+</script>
+</html>

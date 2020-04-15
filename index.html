@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <input type="text"  ref="lat" placeholder="Latitude">
+        <input type="text"  ref="lng" placeholder="Longitude">
+        <input type="number" name="status" placeholder="0/1">
+        
+        <button type="submit">Submit</button>
+    </form>
+    <button id="mybtn">post it</button>
+</body>
+<script>
+    document.getElementById("myform").onsubmit=(e)=>{
+     e.preventDefault();
+     var lng=this.refs.lng.value;
+     var lat=this.refs.lat.value;
+    
+    fetch('/api/ninjas?lng='+'&lat='+lat).then(function(data){
+        return data.json();
+    }).then(json=>{
+        this.setState({
+            ninjas:json
+        })
+    })
+
+}
+</script>
+</html>
